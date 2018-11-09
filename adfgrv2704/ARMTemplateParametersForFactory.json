@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfgrv2704"
+		},
+		"integrationRuntime_integrationRuntime1": {
+			"value": "integrationRuntime1"
+		},
+		"AzureBlob_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStore1_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureBlob_properties_typeProperties_fileName": {
+			"value": "FAAMerge.hql"
+		},
+		"AzureBlob_properties_typeProperties_folderPath": {
+			"value": "input"
+		},
+		"AzureDataLakeStore_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"AzureDataLakeStore_properties_typeProperties_folderPath": {
+			"value": "test"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://adlagradls.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_servicePrincipalId": {
+			"value": "e39714d8-5bcd-48ce-aab8-88f3a6f43d0a"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"value": "6bfb88db-92a9-4e0e-969f-da7eca23e6c2"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"value": "gorg"
+		}
+	}
+}
