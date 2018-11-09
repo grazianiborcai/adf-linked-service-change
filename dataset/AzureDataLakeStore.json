@@ -1,0 +1,15 @@
+{
+	"name": "AzureDataLakeStore",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStore1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureDataLakeStoreFile",
+		"typeProperties": {
+			"fileName": "",
+			"folderPath": "test"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

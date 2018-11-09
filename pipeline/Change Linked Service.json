@@ -1,0 +1,88 @@
+{
+	"name": "Change Linked Service",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Get token",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/<Subscription>/resourceGroups/<Resource_group>/providers/Microsoft.DataFactory/factories/<Data_Factory_Name>/linkedservices/<Linked_Service_Name>?api-version=2018-06-01",
+					"method": "PUT",
+					"headers": {
+						"Content-Type": "Application/json",
+						"Authorization": {
+							"value": "Bearer @{activity('Get token').output.access_token}",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"properties": {
+							"description": "LS_changed",
+							"type": "AzureStorage",
+							"typeProperties": {
+								"connectionString": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Web",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copy pipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Get token",
+				"type": "WebActivity",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"url": "https://login.microsoftonline.com/<Tenant>/oauth2/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&client_id=<Client_ID>&client_secret=<Client_secret>&resource=https://management.azure.com"
+				}
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
